@@ -337,6 +337,30 @@ clean:
 	@echo
 	@echo Done
 
+setup_cmsis:
+	git remote add -f argonio-stm32-cmsis git@github.com:dobromyslov/argonio-stm32-cmsis.git
+	git checkout -b cmsis argonio-stm32-cmsis/4.1
+	git checkout master
+	git merge --squash -s subtree --no-commit cmsis
+
+setup_hal:
+	git remote add -f argonio-stm32f0xx-hal-driver git@github.com:dobromyslov/argonio-stm32f0xx-hal-driver.git
+	git checkout -b hal argonio-stm32f0xx-hal-driver/1.0.1
+	git checkout master
+	git merge --squash -s subtree --no-commit hal
+
+update_cmsis:
+	git checkout cmsis
+	git pull
+	git checkout master
+	git merge --squash -s subtree --no-commit cmsis
+
+update_hal:
+	git checkout hal
+	git pull
+	git checkout master
+	git merge --squash -s subtree --no-commit hal
+
 #
 # Include the dependency files, should be the last of the makefile
 #
